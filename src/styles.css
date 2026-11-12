@@ -1,0 +1,116 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  --color-mh-red: var(--mh-red);
+  --color-mh-black: var(--mh-black);
+  --color-mh-white: var(--mh-white);
+  --color-mh-pink-50: var(--mh-pink-50);
+  --color-mh-pink-200: var(--mh-pink-200);
+  --color-mh-cream: var(--mh-cream);
+  --color-mh-sand: var(--mh-sand);
+  --color-mh-beige: var(--mh-beige);
+  --color-mh-turquoise: var(--mh-turquoise);
+  --color-mh-violet: var(--mh-violet);
+  --color-mh-mint: var(--mh-mint);
+  --color-mh-magenta: var(--mh-magenta);
+  --color-mh-sky: var(--mh-sky);
+  --color-success: var(--mh-mint);
+  --color-success-foreground: var(--mh-black);
+  --color-background: var(--mh-pink-50);
+  --color-foreground: var(--mh-black);
+  --color-border: var(--mh-pink-200);
+}
+
+:root {
+  --mh-red: #e2250c;
+  --mh-black: #000000;
+  --mh-white: #ffffff;
+  --mh-pink-50: #fff2f0;
+  --mh-pink-200: #f9d3ce;
+  --mh-cream: #faf7f3;
+  --mh-sand: #ede8e6;
+  --mh-beige: #e4d8c4;
+  --mh-turquoise: #5ad5d9;
+  --mh-violet: #aa89e3;
+  --mh-mint: #03dfb2;
+  --mh-magenta: #d81e88;
+  --mh-sky: #bde3f2;
+  color-scheme: light;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    background-color: var(--mh-pink-50);
+    color: var(--mh-black);
+    font-family: var(--font-sans);
+    font-weight: 400;
+  }
+  h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; }
+  button { cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--mh-red); outline-offset: 3px; border-radius: 8px; }
+}
+
+@utility label-caps {
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+@utility card-mh {
+  background: var(--mh-white);
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 0 var(--mh-pink-200), 0 10px 30px -18px rgb(226 37 12 / 0.35);
+}
+@utility btn-mh {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  background: var(--mh-red);
+  color: var(--mh-white);
+  font-weight: 500;
+  padding: 0.95rem 1.75rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s;
+  box-shadow: 0 10px 24px -12px rgb(226 37 12 / 0.7);
+  &:hover { transform: translateY(-1px); }
+  &:active { transform: scale(0.97); }
+  &:disabled { opacity: 0.4; pointer-events: none; }
+}
+@utility btn-mh-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  background: var(--mh-white);
+  color: var(--mh-black);
+  font-weight: 500;
+  padding: 0.85rem 1.5rem;
+  border: 1.5px solid var(--mh-black);
+  transition: transform 0.15s ease;
+  &:active { transform: scale(0.97); }
+}
+
+@keyframes blob-morph {
+  0%, 100% { border-radius: 58% 42% 55% 45% / 45% 55% 45% 55%; transform: rotate(0deg) scale(1); }
+  33% { border-radius: 40% 60% 42% 58% / 60% 38% 62% 40%; transform: rotate(8deg) scale(1.04); }
+  66% { border-radius: 63% 37% 48% 52% / 38% 62% 38% 62%; transform: rotate(-6deg) scale(0.97); }
+}
+@utility blob {
+  position: absolute;
+  border-radius: 58% 42% 55% 45% / 45% 55% 45% 55%;
+  animation: blob-morph 14s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
