@@ -1,1 +1,0 @@
-import{g as t,h as e,p as a}from"./api-CeISE2gp.js";async function s(){if(!t)return null;try{return await e({action:"stats"})}catch{return null}}async function o(n){return t?a({action:"admin",password:n}):{ok:!1,error:"Le Google Sheet n'est pas encore connecté (API_URL vide dans src/config.ts)."}}export{o as a,s as g};
