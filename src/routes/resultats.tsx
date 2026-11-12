@@ -39,7 +39,7 @@ function Admin() {
         setPw(null);
       }
     } catch {
-      setError("Erreur de chargement. Vérifiez votre connexion.");
+      setError("Impossible de lire les résultats depuis ce réseau. Essayez depuis votre téléphone en 4G, ou consultez directement votre Google Sheet.");
     } finally {
       setLoading(false);
     }

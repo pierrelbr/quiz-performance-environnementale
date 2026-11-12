@@ -1,6 +1,7 @@
 import { modules } from "@/content/quiz";
 import { getProgress, setProgress } from "./progress";
 import { backendConfigured, post } from "./api";
+import { API_URL } from "@/config";
 
 // Envoi anonyme des réponses vers le Google Sheet (via Apps Script).
 // Aucune donnée personnelle : seulement un identifiant aléatoire par participation.
@@ -12,8 +13,23 @@ async function send(body: Record<string, unknown>) {
     if (!r.ok) console.error(r.error);
     return r.ok;
   } catch (e) {
-    console.error(e);
-    return false;
+    // Google renvoie sa réponse via une redirection (googleusercontent.com) que certains
+    // réseaux d'entreprise ou navigateurs bloquent, alors que l'envoi a bien été reçu.
+    // On renvoie en mode "no-cors" : la réponse est illisible mais la requête arrive.
+    // Le script ignore les doublons, ce second envoi est donc sans risque.
+    console.warn("Réponse illisible, renvoi en mode no-cors", e);
+    try {
+      await fetch(API_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(body),
+      });
+      return true;
+    } catch (e2) {
+      console.error(e2);
+      return false;
+    }
   }
 }
 
